@@ -1,16 +1,14 @@
-<h1>Favorite Restaurant List</h1>
+<h1>List of Stylists</h1>
 <ul>
-  @foreach(var restaurant in Model)
+  @foreach(var stylist in Model)
   {
-    <form action="/favrestaurants/delete" method="post">
-    <li>@restaurant.GetCuisine() - @restaurant.GetName(): @restaurant.GetLocation(), Description: @restaurant.GetDescription()
-      <a href= "/favrestaurants/@restaurant.GetId()">Edit</a>
-      <input type="number" name="deleteId" value="@restaurant.GetId()" hidden>
-      <button type="submit" name="button">Delete</button></li></form>
+    <li>@stylist.GetName(): @stylist.GetDescription()
   }
 </ul>
 
 <h3><a href="/">Home</a></h3>
-<h3><a href="/favrestaurants">List of Restaurants</a></h3>
-<h3><a href="/cuisines">List of Cuisine</a></h3>
-<h3><a href="/favrestaurants/new">Add new restaurant</a></h3>
+<h3><a href="/stylists">List of Stylists</a></h3>
+<h3><a href="/stylists/new">Add new Stylist</a></h3>
+<h3><a href="/stylists/search">Find a Stylist</a></h3>
+<h3><a href="/clients">List of Clients</a></h3>
+<h3><a href="/clients/new">Add new Client</a></h3>
