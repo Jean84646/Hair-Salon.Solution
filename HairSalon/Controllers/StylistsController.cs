@@ -31,7 +31,11 @@ namespace HairSalon.Controllers
       createStylist.Save();
       return RedirectToAction("Index");
     }
-
+    [HttpGet("/stylists/search")]
+    public ActionResult SearchForm()
+    {
+      return View();
+    }
     [HttpPost("/stylists/search")]
     public ActionResult Search(string searchFx, string searchTerm)
     {
@@ -40,10 +44,6 @@ namespace HairSalon.Controllers
       {
         foundStylists = Stylist.FindByStylist(searchTerm);
       }
-      // else
-      // {
-      //   foundStylists = Stylist.FindByClient(searchTerm);
-      // }
       return View("Index", foundStylists);
     }
   }

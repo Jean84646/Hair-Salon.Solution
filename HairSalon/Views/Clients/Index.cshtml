@@ -1,0 +1,13 @@
+<h1>List of Clients</h1>
+<ul>
+  @foreach(var client in Model)
+  {
+    <li>@client.GetClient() - Stylist: @client.GetStylist()</li>
+  }
+</ul>
+
+<h3><a href="/">Home</a></h3>
+<h3><a href="/stylists">List of Stylists</a></h3>
+<h3><a href="/stylists/new">Add new Stylist</a></h3>
+<h3><a href="/stylists/search">Find a Stylist</a></h3>
+<h3><a href="/clients/new">Add new Client</a></h3>
