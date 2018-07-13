@@ -27,7 +27,7 @@ namespace HairSalon.Controllers
       {
         newDescription = description;
       }
-      Stylist createStylist = new Stylist(stylistName, newDescription);
+      Stylist createStylist = new Stylist(stylistName, description);
       createStylist.Save();
       return RedirectToAction("Index");
     }
