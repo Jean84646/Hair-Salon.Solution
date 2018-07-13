@@ -8,77 +8,43 @@ namespace HairSalon.Controllers
 {
   public class StylistsController : Controller
   {
-    [HttpGet("/favrestaurants")]
+    [HttpGet("/stylists")]
     public ActionResult Index()
     {
-      List<FavRestaurant> allRestaurants = FavRestaurant.GetAll();
-      return View(allRestaurants);
+      List<Stylists> allStylists = Stylists.GetAll();
+      return View(allStylists);
     }
-    [HttpGet("/favrestaurants/new")]
+    [HttpGet("/stylists/new")]
     public ActionResult CreateForm()
     {
       return View();
     }
-    [HttpPost("/favrestaurants")]
-    public ActionResult Create(string restName, string restType, string restLocation, string restDescription)
+    [HttpPost("/stylists")]
+    public ActionResult Create(string stylistName, string description)
     {
-      string restaurantDescription = "";
-      string restaurantLocation = "";
-      if(!string.IsNullOrWhiteSpace(Request.Form["restDescription"]))
+      string newDescription = "";
+      if(!string.IsNullOrWhiteSpace(Request.Form["description"]))
       {
-        restaurantDescription = restDescription;
+        newDescription = description;
       }
-      if(!string.IsNullOrWhiteSpace(Request.Form["restLocation"]))
-      {
-        restaurantLocation = restLocation;
-      }
-      FavRestaurant createRestaurant = new FavRestaurant(restName,  restType,  restaurantLocation, restaurantDescription);
-      createRestaurant.Save();
+      Stylists createStylist = new Stylists(stylistName, newDescription);
+      createStylist.Save();
       return RedirectToAction("Index");
     }
-    [HttpGet("/favrestaurants/{id}")]
-    public ActionResult EditForm(int id)
-    {
-      return View(FavRestaurant.FindById(id));
-    }
-    [HttpPost("/favrestaurants/delete")]
-    public ActionResult Delete(string deleteId)
-    {
-      int id = int.Parse(deleteId);
-      FavRestaurant.FindById(id).Delete();
-      return RedirectToAction("Index");
-    }
-    [HttpPost("/favrestaurants/edit")]
-    public ActionResult Edit(string editDescription, string EditId)
-    {
-      int id = int.Parse(EditId);
-      FavRestaurant.FindById(id).EditDescription(editDescription);
-      return RedirectToAction("Index");
-    }
-    [HttpGet("/favrestaurants/cuisines/{cuisine}")]
-    public ActionResult FindByCuisine(string cuisine)
-    {
-      List<FavRestaurant> matchCuisines = FavRestaurant.FindByCuisine(cuisine);
-      return View("Index", matchCuisines);
-    }
-    [HttpGet("/favrestaurants/search")]
-    public ActionResult SearchForm()
-    {
-      return View();
-    }
-    [HttpPost("/favrestaurants/search")]
+
+    [HttpPost("/stylists/search")]
     public ActionResult Search(string searchFx, string searchTerm)
     {
-      List<FavRestaurant> foundRestaurants = new List<FavRestaurant> {};
-      if(searchFx.Equals("byName"))
+      List<Stylists> foundStylists = new List<Stylists> {};
+      if(searchFx.Equals("byStylist"))
       {
-        foundRestaurants = FavRestaurant.FindByName(searchTerm);
+        foundStylists = Stylists.FindByStylist(searchTerm);
       }
       else
       {
-        foundRestaurants = FavRestaurant.FindByCuisine(searchTerm);
+        foundStylists = Stylists.FindByClient(searchTerm);
       }
-      return View("Index", foundRestaurants);
+      return View("Index", foundStylists);
     }
   }
 }

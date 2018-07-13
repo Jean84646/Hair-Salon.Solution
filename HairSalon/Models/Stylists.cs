@@ -50,7 +50,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO fav_restaurant (name, cuisine_id, location, description) VALUES (@inputName, @inputCuisine, @inputLocation, @inputDescription);";
+      cmd.CommandText = @"INSERT INTO stylist (name, description, id) VALUES (@inputName, @inputDescription);";
       MySqlParameter newName = new MySqlParameter();
       newName.ParameterName = "@inputName";
       newName.Value = this.Name;
@@ -59,14 +59,6 @@ namespace HairSalon.Models
       newDescription.ParameterName = "@inputDescription";
       newDescription.Value = this.Description;
       cmd.Parameters.Add(newDescription);
-      MySqlParameter newLocation = new MySqlParameter();
-      newLocation.ParameterName = "@inputLocation";
-      newLocation.Value = this.Location;
-      cmd.Parameters.Add(newLocation);
-      MySqlParameter newCuisine = new MySqlParameter();
-      newCuisine.ParameterName = "@inputCuisine";
-      newCuisine.Value = this.Cuisine;
-      cmd.Parameters.Add(newCuisine);
       cmd.ExecuteNonQuery();
       Id = (int) cmd.LastInsertedId;
       conn.Close();
@@ -78,28 +70,26 @@ namespace HairSalon.Models
 
     public static List<Stylists> GetAll()
     {
-      List<Stylists> allRestaurants = new List<Stylists> {};
+      List<Stylists> allStylists = new List<Stylists> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM fav_restaurant;";
+      cmd.CommandText = @"SELECT * FROM stylist;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int id = rdr.GetInt32(0);
-        string name = rdr.GetString(1);
-        string description = rdr.GetString(2);
-        string location = rdr.GetString(3);
-        string cuisine = rdr.GetString(4);
-        Stylists newRestaurant = new Stylists(name, cuisine, location, description, id);
-        allRestaurants.Add(newRestaurant);
+        string name = rdr.GetString(0);
+        string description = rdr.GetString(1);
+        int id = rdr.GetInt32(2);
+        Stylists newStylist = new Stylists(name, description, id);
+        allStylists.Add(newStylist);
       }
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return allRestaurants;
+      return allStylists;
     }
 
     public static Stylists FindById(int byId)
@@ -107,12 +97,10 @@ namespace HairSalon.Models
       int id = 0;
       string name = "";
       string description = "";
-      string location = "";
-      string cuisine = "";
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM fav_restaurant WHERE id = @idPara;";
+      cmd.CommandText = @"SELECT * FROM stylist WHERE id = @idPara;";
       MySqlParameter paraId = new MySqlParameter();
       paraId.ParameterName = "@idPara";
       paraId.Value = byId;
@@ -120,122 +108,73 @@ namespace HairSalon.Models
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        id = rdr.GetInt32(0);
-        name = rdr.GetString(1);
-        description = rdr.GetString(2);
-        location = rdr.GetString(3);
-        cuisine = rdr.GetString(4);
+        name = rdr.GetString(0);
+        description = rdr.GetString(1);
+        id = rdr.GetInt32(2);
       }
-      Stylists newRestaurant = new Stylists(name, cuisine, location, description, id);
+      Stylists newStylist = new Stylists(name, description, id);
 
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return newRestaurant;
+      return newStylist;
     }
 
-    public static List<Stylists> FindByCuisine(string myCuisine)
+    public static List<Stylists> FindByStylist(string byStylist)
     {
-      List<Stylists> foundRestaurants = new List<Stylists> {};
+      List<Stylists> foundStylists = new List<Stylists> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM fav_restaurant WHERE cuisine_id = @Cuisine;";
-      MySqlParameter searchCuisine = new MySqlParameter();
-      searchCuisine.ParameterName = "@Cuisine";
-      searchCuisine.Value = myCuisine;
-      cmd.Parameters.Add(searchCuisine);
+      cmd.CommandText = @"SELECT * FROM stylist WHERE name = @Stylist;";
+      MySqlParameter searchStylist = new MySqlParameter();
+      searchStylist.ParameterName = "@Stylist";
+      searchStylist.Value = byStylist + '%';
+      cmd.Parameters.Add(searchStylist);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int id = rdr.GetInt32(0);
-        string name = rdr.GetString(1);
-        string description = rdr.GetString(2);
-        string location = rdr.GetString(3);
-        string cuisine = rdr.GetString(4);
-        Stylists newRestaurant = new Stylists(name, cuisine, location, description, id);
-        foundRestaurants.Add(newRestaurant);
+        string name = rdr.GetString(0);
+        string description = rdr.GetString(1);
+        int id = rdr.GetInt32(2);
+        Stylists newStylist = new Stylists(name, description, id);
+        foundStylists.Add(newStylist);
       }
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return foundRestaurants;
+      return foundStylists;
     }
 
-    public static List<Stylists> FindByName(string byName)
+    public static List<Stylists> FindByClient(string byClient)
     {
-      List<Stylists> foundRestaurants = new List<Stylists> {};
+      List<Stylists> foundClients = new List<Stylists> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM fav_restaurant WHERE name LIKE @Name;";
-      MySqlParameter searchName = new MySqlParameter();
-      searchName.ParameterName = "@Name";
-      searchName.Value = byName + '%';
-      cmd.Parameters.Add(searchName);
+      cmd.CommandText = @"SELECT * FROM client WHERE client LIKE @Client;";
+      MySqlParameter searchClient = new MySqlParameter();
+      searchClient.ParameterName = "@Name";
+      searchClient.Value = byName + '%';
+      cmd.Parameters.Add(searchClient);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int id = rdr.GetInt32(0);
-        string name = rdr.GetString(1);
-        string description = rdr.GetString(2);
-        string location = rdr.GetString(3);
-        string cuisine = rdr.GetString(4);
-        Stylists newRestaurant = new Stylists(name, cuisine, location, description, id);
-        foundRestaurants.Add(newRestaurant);
+        string name = rdr.GetString(0);
+        string stylist = rdr.GetString(1);
+        Clients newClient = new Clients(client, stylist);
+        foundClients.Add(newClient);
       }
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return foundRestaurants;
-    }
-
-    public void EditDescription(string newDescription)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE fav_restaurant SET description = @descriptionPara WHERE id = @idPara;";
-      MySqlParameter paraDescription = new MySqlParameter();
-      paraDescription.ParameterName = "@descriptionPara";
-      paraDescription.Value = newDescription;
-      cmd.Parameters.Add(paraDescription);
-      MySqlParameter paraId = new MySqlParameter();
-      paraId.ParameterName = "@idPara";
-      paraId.Value = this.Id;
-      cmd.Parameters.Add(paraId);
-      cmd.ExecuteNonQuery();
-
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
-
-    public void Delete()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM fav_restaurant WHERE id=@thisId;";
-      MySqlParameter deleteId = new MySqlParameter();
-      deleteId.ParameterName = "@thisId";
-      deleteId.Value = this.Id;
-      cmd.Parameters.Add(deleteId);
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
+      return foundClients;
     }
 
     public static void DeleteAll()
@@ -244,7 +183,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM fav_restaurant;";
+      cmd.CommandText = @"DELETE FROM stylist;";
 
       cmd.ExecuteNonQuery();
 

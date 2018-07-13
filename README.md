@@ -1,15 +1,15 @@
-# Pig Out
-##### Favorite restaurant database.
+# Hair Salon
+##### A Hair Salon Application
 
-#### By Anousone Kaseumsouk, Lan Dam, Jean Jia, 07.11.2018
+#### By Jean Jia, 07.13.2018
 
 ## Description
 
-A database that stores users favorite restaurant.
+A database application to hold a list of stylists and their clients.
 
 ## Setup
 
-Install Pig Out by downloading the folder.
+Install Hair Salon by downloading the folder.
 
 ## Technologies Used
 
@@ -17,20 +17,26 @@ Application: CSharp, netcoreapp1.1, Razor, MAMP, MySQL
 
 ## Support and Contact
 
-For any questions or support details, please email:
-anousonekaseumsouk@icloud.com
-ldam77@yahoo.com
+For any questions, concerns, or support details, please email:
 jean84646@gmail.com
 
 ## Spec
 
-* Connect to both a development database and a test database.
-* Let user add favorite restaurants to database.
-* Let user edit and delete restaurant information from database.
-* Let user display items in the database by query.
+* Create a database to hold list of stylists, stylist's description, and their clients.
+* Allow user to select a stylist to view the stylist's description and a list of all clients that belong to that stylist.
+* Allow user to add new stylists.
+* Allow user to add new clients to specific stylist.
+* User should not be able to add a client if no stylists have been added.
+
+## Setup Database
+Using MySQL:
+CREATE DATABASE jean_jia;
+USE jean_jia;
+CREATE TABLE stylists (name VARCHAR (255), description VARCHAR (255), id serial PRIMARY KEY);
+CREATE TABLE clients (client VARCHAR (255), stylist VARCHAR (255));
 
 ### Legal
 
-Copyright (c) 2018 **Anousone Kaseumsouk, Lan Dam, and Jean Jia**
+Copyright (c) 2018 **Jean Jia**
 
 This software is licensed under the MIT license.
