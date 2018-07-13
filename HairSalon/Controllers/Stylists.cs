@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using HairSalon.Models;
-using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
+using HairSalon.Models;
 
 namespace HairSalon.Controllers
 {
@@ -11,7 +11,7 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists")]
     public ActionResult Index()
     {
-      List<Stylists> allStylists = Stylists.GetAll();
+      List<Stylist> allStylists = Stylist.GetAll();
       return View(allStylists);
     }
     [HttpGet("/stylists/new")]
@@ -27,7 +27,7 @@ namespace HairSalon.Controllers
       {
         newDescription = description;
       }
-      Stylists createStylist = new Stylists(stylistName, newDescription);
+      Stylist createStylist = new Stylist(stylistName, newDescription);
       createStylist.Save();
       return RedirectToAction("Index");
     }
@@ -35,15 +35,15 @@ namespace HairSalon.Controllers
     [HttpPost("/stylists/search")]
     public ActionResult Search(string searchFx, string searchTerm)
     {
-      List<Stylists> foundStylists = new List<Stylists> {};
+      List<Stylist> foundStylists = new List<Stylist> {};
       if(searchFx.Equals("byStylist"))
       {
-        foundStylists = Stylists.FindByStylist(searchTerm);
+        foundStylists = Stylist.FindByStylist(searchTerm);
       }
-      else
-      {
-        foundStylists = Stylists.FindByClient(searchTerm);
-      }
+      // else
+      // {
+      //   foundStylists = Stylist.FindByClient(searchTerm);
+      // }
       return View("Index", foundStylists);
     }
   }

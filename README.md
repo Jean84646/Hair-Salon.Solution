@@ -29,11 +29,11 @@ jean84646@gmail.com
 * User should not be able to add a client if no stylists have been added.
 
 ## Setup Database
-Using MySQL:
-CREATE DATABASE jean_jia;
-USE jean_jia;
-CREATE TABLE stylists (name VARCHAR (255), description VARCHAR (255), id serial PRIMARY KEY);
-CREATE TABLE clients (client VARCHAR (255), stylist VARCHAR (255));
+Using MySQL command:
+* CREATE DATABASE jean_jia;
+* USE jean_jia;
+* CREATE TABLE stylists (name VARCHAR (255), description TEXT, id serial PRIMARY KEY);
+* CREATE TABLE clients (client VARCHAR (255), stylist VARCHAR (255));
 
 ### Legal
 
