@@ -1,19 +1,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using WordCounter.Controllers;
-using WordCounter.Models;
+using HairSalon.Controllers;
+using HairSalon.Models;
 
-namespace WordCounter.Tests
+namespace HairSalon.Tests
 {
     [TestClass]
-    public class RepeatCountersControllerTest
+    public class ClientsControllerTest
     {
       [TestMethod]
         public void Index_ReturnsCorrectView_True()
         {
             //Arrange
-            WordCounterController controller = new WordCounterController();
+            ClientsController controller = new ClientsController();
 
             //Act
             ActionResult indexView = controller.Index();
@@ -21,23 +21,23 @@ namespace WordCounter.Tests
             //Assert
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
-      [TestMethod]
+        [TestMethod]
         public void Index_HasCorrectModelType_ItemList()
         {
             //Arrange
-            ViewResult indexView = new WordCounterController().Index() as ViewResult;
+            ViewResult indexView = new ClientsController().Index() as ViewResult;
 
             //Act
             var result = indexView.ViewData.Model;
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(List<RepeatCounter>));
+            Assert.IsInstanceOfType(result, typeof(List<Client>));
         }
       [TestMethod]
         public void CreateForm_ReturnsCorrectView_True()
         {
             //Arrange
-            WordCounterController controller = new WordCounterController();
+            ClientsController controller = new ClientsController();
 
             //Act
             ActionResult indexView = controller.CreateForm();

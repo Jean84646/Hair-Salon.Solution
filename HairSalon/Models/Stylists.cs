@@ -120,6 +120,33 @@ namespace HairSalon.Models
       return foundStylists;
     }
 
+    public static List<CuisineType> FindByCuisine(string myCuisine)
+    {
+      List<CuisineType> foundCuisines = new List<CuisineType> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM cuisine WHERE cuisine_id = @Cuisine;";
+      MySqlParameter searchCuisine = new MySqlParameter();
+      searchCuisine.ParameterName = "@Cuisine";
+      searchCuisine.Value = myCuisine;
+      cmd.Parameters.Add(searchCuisine);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        string cuisine = rdr.GetString(0);
+        string description = rdr.GetString(1);
+        CuisineType newCuisine = new CuisineType(cuisine, description);
+        foundCuisines.Add(newCuisine);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundCuisines;
+    }
+
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();

@@ -1,19 +1,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using WordCounter.Controllers;
-using WordCounter.Models;
+using HairSalon.Controllers;
+using HairSalon.Models;
 
-namespace WordCounter.Tests
+namespace HairSalon.Tests
 {
     [TestClass]
-    public class RepeatCountersControllerTest
+    public class StylistsControllerTest
     {
       [TestMethod]
         public void Index_ReturnsCorrectView_True()
         {
             //Arrange
-            WordCounterController controller = new WordCounterController();
+            StylistsController controller = new StylistsController();
 
             //Act
             ActionResult indexView = controller.Index();
@@ -21,23 +21,23 @@ namespace WordCounter.Tests
             //Assert
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
-      [TestMethod]
+        [TestMethod]
         public void Index_HasCorrectModelType_ItemList()
         {
             //Arrange
-            ViewResult indexView = new WordCounterController().Index() as ViewResult;
+            ViewResult indexView = new StylistsController().Index() as ViewResult;
 
             //Act
             var result = indexView.ViewData.Model;
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(List<RepeatCounter>));
+            Assert.IsInstanceOfType(result, typeof(List<Stylist>));
         }
       [TestMethod]
         public void CreateForm_ReturnsCorrectView_True()
         {
             //Arrange
-            WordCounterController controller = new WordCounterController();
+            StylistsController controller = new StylistsController();
 
             //Act
             ActionResult indexView = controller.CreateForm();
@@ -45,5 +45,17 @@ namespace WordCounter.Tests
             //Assert
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
+        [TestMethod]
+          public void CreateSearch_ReturnsCorrectView_True()
+          {
+              //Arrange
+              StylistsController controller = new StylistsController();
+
+              //Act
+              ActionResult indexView = controller.SearchForm();
+
+              //Assert
+              Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+          }
     }
 }
