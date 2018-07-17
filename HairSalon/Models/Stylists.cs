@@ -41,7 +41,7 @@ namespace HairSalon.Models
         bool nameEquality = (this.GetName() == newStylist.GetName());
         bool descriptionEquality = (this.GetDescription() == newStylist.GetDescription());
         bool idEquality = (this.GetId() == newStylist.GetId());
-        return (nameEqual && descriptionEqual && idEqual);
+        return (nameEquality && descriptionEquality && idEquality);
       }
     }
 
@@ -50,7 +50,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylist (name, description) VALUES (@inputName, @inputDescription);";
+      cmd.CommandText = @"INSERT INTO stylists (name, description) VALUES (@inputName, @inputDescription);";
       MySqlParameter newName = new MySqlParameter();
       newName.ParameterName = "@inputName";
       newName.Value = this.Name;
@@ -74,7 +74,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist;";
+      cmd.CommandText = @"SELECT * FROM stylists;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -126,7 +126,7 @@ namespace HairSalon.Models
           MySqlConnection conn = DB.Connection();
           conn.Open();
           MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-          cmd.CommandText = @"SELECT * FROM client WHERE stylist_id = @Stylist;";
+          cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @Stylist;";
           MySqlParameter searchStylist = new MySqlParameter();
           searchStylist.ParameterName = "@Stylist";
           searchStylist.Value = myStylist;
@@ -153,7 +153,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylist;";
+      cmd.CommandText = @"DELETE FROM stylists;";
 
       cmd.ExecuteNonQuery();
 

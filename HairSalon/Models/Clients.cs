@@ -35,7 +35,7 @@ namespace HairSalon.Models
         Client newClient = (Client) otherClient;
         bool clientEquality = (this.GetClient() == newClient.GetClient());
         bool stylistEquality = (this.GetStylist() == newClient.GetStylist());
-        return (clientEqual && stylistEqual);
+        return (clientEquality && stylistEquality);
       }
     }
 
@@ -44,7 +44,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO client (client, stylist) VALUES (@inputClient, @inputStylist);";
+      cmd.CommandText = @"INSERT INTO clients (client, stylist) VALUES (@inputClient, @inputStylist);";
       MySqlParameter newName = new MySqlParameter();
       newName.ParameterName = "@inputClient";
       newName.Value = this.client;
@@ -67,7 +67,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM client;";
+      cmd.CommandText = @"SELECT * FROM clients;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -90,7 +90,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylist;";
+      cmd.CommandText = @"DELETE FROM clients;";
 
       cmd.ExecuteNonQuery();
 
