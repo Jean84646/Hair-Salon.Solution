@@ -33,7 +33,7 @@ Using MySQL command:
 * CREATE DATABASE jean_jia;
 * USE jean_jia;
 * CREATE TABLE stylists (name VARCHAR (255), description TEXT, id serial PRIMARY KEY);
-* CREATE TABLE clients (client VARCHAR (255), stylist VARCHAR (255));
+* CREATE TABLE clients (client VARCHAR (255), stylist_id VARCHAR (255));
 
 ### Legal
 

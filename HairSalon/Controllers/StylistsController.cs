@@ -42,7 +42,7 @@ namespace HairSalon.Controllers
       List<Stylist> foundStylists = new List<Stylist> {};
       if(searchFx.Equals("byStylist"))
       {
-        foundStylists = Stylist.FindByStylist(searchTerm);
+        foundStylists = Stylist.FindStylistPairs(searchTerm);
       }
       return View("Index", foundStylists);
     }

@@ -38,9 +38,9 @@ namespace HairSalon.Models
       else
       {
         Stylist newStylist = (Stylist) otherStylist;
-        bool nameEqual = (this.GetName() == newStylist.GetName());
-        bool descriptionEqual = (this.GetDescription() == newStylist.GetDescription());
-        bool idEqual = (this.GetId() == newStylist.GetId());
+        bool nameEquality = (this.GetName() == newStylist.GetName());
+        bool descriptionEquality = (this.GetDescription() == newStylist.GetDescription());
+        bool idEquality = (this.GetId() == newStylist.GetId());
         return (nameEqual && descriptionEqual && idEqual);
       }
     }
@@ -92,35 +92,60 @@ namespace HairSalon.Models
       return allStylists;
     }
 
-    public static List<Stylist> FindByStylist(string byStylist)
-    {
-      List<Stylist> foundStylists = new List<Stylist> {};
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist WHERE name LIKE @Stylist;";
-      MySqlParameter searchStylist = new MySqlParameter();
-      searchStylist.ParameterName = "@Stylist";
-      searchStylist.Value = byStylist + '%';
-      cmd.Parameters.Add(searchStylist);
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        string name = rdr.GetString(0);
-        string description = rdr.GetString(1);
-        int id = rdr.GetInt32(2);
-        Stylist newStylist = new Stylist(name, description, id);
-        foundStylists.Add(newStylist);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return foundStylists;
-    }
+    // public static List<Stylist> FindByStylist(string byStylist)
+    // {
+    //   List<Stylist> foundStylists = new List<Stylist> {};
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM stylist WHERE name LIKE @Stylist;";
+    //   MySqlParameter searchStylist = new MySqlParameter();
+    //   searchStylist.ParameterName = "@Stylist";
+    //   searchStylist.Value = byStylist + '%';
+    //   cmd.Parameters.Add(searchStylist);
+    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //   while(rdr.Read())
+    //   {
+    //     string name = rdr.GetString(0);
+    //     string description = rdr.GetString(1);
+    //     int id = rdr.GetInt32(2);
+    //     Stylist newStylist = new Stylist(name, description, id);
+    //     foundStylists.Add(newStylist);
+    //   }
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return foundStylists;
+    // }
 
-    
+    public static List<searchStylish> FindStylistPairs(string myStylist)
+        {
+          List<StylistList> foundStylists = new List<StylistList> {};
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT * FROM client WHERE stylist_id = @Stylist;";
+          MySqlParameter searchStylist = new MySqlParameter();
+          searchStylist.ParameterName = "@Stylist";
+          searchStylist.Value = myStylist;
+          cmd.Parameters.Add(searchStylist);
+          MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+          while(rdr.Read())
+          {
+            string client = rdr.GetString(0);
+            string stylist_id = rdr.GetString(1);
+            Stylist newStylist = new Stylist(stylist_id, client);
+            foundStylists.Add(newStylist);
+          }
+          conn.Close();
+          if (conn != null)
+          {
+            conn.Dispose();
+          }
+          return foundStylists;
+        }
 
     public static void DeleteAll()
     {

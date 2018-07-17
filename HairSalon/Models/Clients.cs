@@ -8,12 +8,12 @@ namespace HairSalon.Models
   public class Client
   {
     private string client;
-    private string stylist;
+    private string stylist_id;
 
     public Client(string newClient, string newStylist = "")
     {
       client = newClient;
-      stylist = newStylist;
+      stylist_id = newStylist;
     }
     public string GetClient()
     {
@@ -21,7 +21,7 @@ namespace HairSalon.Models
     }
     public string GetStylist()
     {
-      return stylist;
+      return stylist_d;
     }
 
     public override bool Equals(System.Object otherClient)
@@ -33,8 +33,8 @@ namespace HairSalon.Models
       else
       {
         Client newClient = (Client) otherClient;
-        bool clientEqual = (this.GetClient() == newClient.GetClient());
-        bool stylistEqual = (this.GetStylist() == newClient.GetStylist());
+        bool clientEquality = (this.GetClient() == newClient.GetClient());
+        bool stylistEquality = (this.GetStylist() == newClient.GetStylist());
         return (clientEqual && stylistEqual);
       }
     }
@@ -51,7 +51,7 @@ namespace HairSalon.Models
       cmd.Parameters.Add(newName);
       MySqlParameter newStylist = new MySqlParameter();
       newStylist.ParameterName = "@inputStylist";
-      newStylist.Value = this.stylist;
+      newStylist.Value = this.stylist_id;
       cmd.Parameters.Add(newStylist);
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -72,8 +72,8 @@ namespace HairSalon.Models
       while(rdr.Read())
       {
         string client = rdr.GetString(0);
-        string stylist = rdr.GetString(1);
-        Client newClient = new Client(client, stylist);
+        string stylist_id = rdr.GetString(1);
+        Client newClient = new Client(client, stylist_id);
         allClients.Add(newClient);
       }
       conn.Close();
