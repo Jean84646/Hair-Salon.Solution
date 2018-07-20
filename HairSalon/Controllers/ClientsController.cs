@@ -19,12 +19,5 @@ namespace HairSalon.Controllers
     {
       return View();
     }
-    [HttpPost("/clients")]
-    public ActionResult Create(string clientName, string stylistName)
-    {
-      Client createClient = new Client(clientName, stylistName);
-      createClient.Save();
-      return RedirectToAction("Index");
-    }
   }
 }

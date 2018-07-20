@@ -1,0 +1,19 @@
+<h1>@Model.GetName()'s Clients List</h1>
+
+<ul>
+  @foreach (var client in Model.GetClients())
+  {
+    <li>@client.GetName()</li>
+  }
+</ul>
+
+<form action="/stylists/@Model.GetId()/AddClient" method="post">
+  <div class="">
+    <label for="clientName">Add a client:</label>
+    <input type="text" name="clientName" required>
+  </div>
+  <button type="submit" class="">ADD</button>
+</form>
+
+<h3><a href="/">Home</a></h3>
+<h3><a href="/stylists">Stylists List</a></h3>
