@@ -6,13 +6,13 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class ClientTests : IDisposable
+  public class SpecialtiesTests : IDisposable
   {
     public void Dispose()
     {
       Stylist.DeleteAll();
     }
-    public ClientTests()
+    public SpecialtiesTests()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=3306;database=jean_jia_test;";
     }
@@ -20,17 +20,15 @@ namespace HairSalon.Tests
     public void GetTest_ReturnDataField()
     {
       // arrange
-      string client = "Jamie";
-      string stylist = "Feng";
-      Client testClient = new Client(client, stylist);
+      int id = 1;
+      string specialties = "women";
+      Client testClient = new Client(specialties, id);
 
       // act
-      string resultClient = testClient.GetClient();
-      string resultStylist = testClient.GetStylist();
+      string result = testClient.GetSpecialties();
 
       // assert
-      Assert.AreEqual(client, resultClient);
-      Assert.AreEqual(stylist, resultStylist);
+      Assert.AreEqual(specialties, result);
     }
   }
 }
