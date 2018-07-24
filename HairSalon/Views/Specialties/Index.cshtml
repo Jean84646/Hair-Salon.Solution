@@ -1,0 +1,10 @@
+<h1>Specialties List</h1>
+
+<ul>
+  @foreach(var specialties in Model)
+  {
+    <li>@specialties.GetSpecialties()</li>
+  }
+</ul>
+
+<h3><a href="/">Home</a></h3>

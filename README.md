@@ -25,7 +25,7 @@ jean84646@gmail.com
 * The user is able to see a list of all our stylists.
 * The User is able to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * The User is able to add new stylists to our system when they are hired.
-* The User is able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.
+* The User is able to add new clients to a specific stylist. User should not be able to add a client if no stylists have been added.
 * The User is able to delete stylists (all and single).
 * The User is able to delete clients (all and single).
 * The User is able to view clients (all and single).

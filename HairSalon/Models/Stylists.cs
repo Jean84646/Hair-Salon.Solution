@@ -129,7 +129,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists WHERE name = @nameMatch;";
+      cmd.CommandText = @"SELECT * FROM stylists WHERE name LIKE @nameMatch;";
       MySqlParameter paraName = new MySqlParameter();
       paraName.ParameterName = "@nameMatch";
       paraName.Value = searchName + '%';
@@ -175,6 +175,95 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return myClients;
+    }
+
+    public List<Specialties> GetSpecialties()
+    {
+      List<Specialties> allSpecialties = new List<Specialties> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT specialties.* FROM stylists JOIN stylist_specialties ON (stylists.id = stylist_specialties.stylist_id) JOIN specialties ON (stylist_specialties.specialties_id = specialties.id) WHERE stylists.id = @IdMatch;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@IdMatch";
+      searchId.Value = this.id;
+      cmd.Parameters.Add(searchId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string specialties = rdr.GetString(1);
+        Specialties foundSpecialties = new Specialties(specialties, id);
+        allSpecialties.Add(foundSpecialties);
+      }
+      conn.Close();
+      if (conn !=null)
+      {
+        conn.Dispose();
+      }
+      return allSpecialties;
+    }
+
+    public void EditName(string newName)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET stylist_name = @newName WHERE id = @searchId;";
+      MySqlParameter editName = new MySqlParameter();
+      editName.ParameterName = "@newName";
+      editName.Value = newName;
+      cmd.Parameters.Add(editName);
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = this.id;
+      cmd.Parameters.Add(searchId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    // public void DeleteSpecialty(int specialtyId)
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"DELETE FROM stylist_specialties WHERE stylist_id = @stylistID AND specialty_id = @specialtyID;";
+    //   MySqlParameter searchStylistID = new MySqlParameter();
+    //   searchStylistID.ParameterName = "@stylistID";
+    //   searchStylistID.Value = this.id;
+    //   cmd.Parameters.Add(searchStylistID);
+    //   MySqlParameter searchSpecialtyID = new MySqlParameter();
+    //   searchSpecialtyID.ParameterName = "@specialtyID";
+    //   searchSpecialtyID.Value = specialtyId;
+    //   cmd.Parameters.Add(searchSpecialtyID);
+    //   cmd.ExecuteNonQuery();
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    // }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @idMatch; DELETE FROM stylists_specialties WHERE stylist_id = @idMatch;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@idMatch";
+      searchId.Value = this.id;
+      cmd.Parameters.Add(searchId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public static void DeleteAll()
