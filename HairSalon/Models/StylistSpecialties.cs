@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using UniversityRegistrar;
+using HairSalon;
 
-namespace UniversityRegistrar.Models
+namespace HairSalon.Models
 {
   public class StylistSpecialties
   {

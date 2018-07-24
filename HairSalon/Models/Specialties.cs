@@ -123,8 +123,8 @@ namespace HairSalon.Models
       {
         int id = rdr.GetInt32(0);
         string specialties = rdr.GetString(1);
-        Specialties foundSpecialties = new Specialties(specialties, id);
-        foundSpecialties.Add(foundSpecialties);
+        Specialties foundSpecialty = new Specialties(specialties, id);
+        foundSpecialties.Add(foundSpecialty);
       }
 
       conn.Close();
