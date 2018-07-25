@@ -1,9 +1,18 @@
+@using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
+
 <h1>List of Stylists</h1>
 <ul>
   @foreach(var stylist in Model)
   {
-    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a>: @stylist.GetDescription()</li>
+    <form class="" action="/stylists/delete" method="post">
+      <input type="number" name="stylistId" value="@stylist.GetId()" hidden>
+      <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a><button type="submit" name="button" class="btn">Delete</button></li>
+        <ul>
+          <li>Description: @stylist.GetDescription()</li>
+        </ul>
+    </form>
   }
 </ul>
-
-<h3><a href="/">Home</a></h3>

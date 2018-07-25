@@ -1,5 +1,42 @@
 body {
-  text-align: center;
-  background: url('') no-repeat center fixed;
+  /* font-family: 'Lobster', cursive; */
+  font-family: 'Abril Fatface', cursive;
+  color: black;
+  font-size: 1.5em;
+  background:
+  linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+    ),
+  url("/img/salon.jpg") no-repeat center fixed;
   background-size: cover;
+}
+
+h1 {
+  font-size: 4em;
+  text-align: center;
+}
+
+#navbar {
+  text-align: left;
+  list-style-type: none;
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+}
+
+#navbar li {
+  background-color: black;
+  opacity: 0.7;
+  /* display: inline-block; */
+}
+
+#navbar a {
+  color: white;
+}
+
+#navbar :hover {
+  color: black;
+  background-color: white;
+  text-decoration: none;
 }

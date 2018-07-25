@@ -1,3 +1,7 @@
+@{
+  Layout = "_Layout";
+}
+
 <h1>Clients List</h1>
 <ul>
   @foreach(var client in Model)
@@ -5,5 +9,3 @@
     <li>@client.GetName()</li>
   }
 </ul>
-
-<h3><a href="/">Home</a></h3>

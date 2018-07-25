@@ -25,12 +25,14 @@ jean84646@gmail.com
 * The user is able to see a list of all our stylists.
 * The User is able to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * The User is able to add new stylists to our system when they are hired.
-* The User is able to add new clients to a specific stylist. User should not be able to add a client if no stylists have been added.
+* The User is able to edit JUST the name of a stylist.
 * The User is able to delete stylists (all and single).
-* The User is able to delete clients (all and single).
+
+* The User is able to add new clients to a specific stylist. User should not be able to add a client if no stylists have been added.
 * The User is able to view clients (all and single).
-* The User is able to edit JUST the name of a stylist. (You can choose to allow employees to edit additional properties but it is not required.)
 * The User is able to edit ALL of the information for a client.
+* The User is able to delete clients (all and single).
+
 * The User is able to add a specialty and view all specialties that have been added.
 * The User is able to add a specialty to a stylist.
 * The User is able to click on a specialty and see all of the stylists that have that specialty.
