@@ -2,12 +2,23 @@
   Layout = "_Layout";
 }
 
-<h1>Add Specialty</h1>
+<h1>Assign specialty and stylist</h1>
 
-<form action="/specialties" method="post">
-  <div class="">
-    <label for="addSpecialties">Specialty:</label>
-    <input type="text" name="addSpecialties" required>
-  </div>
-  <button type="submit" class="">ADD</button>
+<form action="/specialties/CreatePairs" method="post">
+  <select name="specialtyId">
+    @foreach(var specialty in Specialty.GetAll())
+    {
+      <option value="@specialty.GetId()">@specialty.GetName()</option>
+    }
+  </select>
+  <select name="stylistId">
+    @foreach(var stylist in Stylist.GetAll())
+    {
+      <option value="@stylist.GetId()">@stylist.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Pair</button>
 </form>
+
+
+Create PAIRS

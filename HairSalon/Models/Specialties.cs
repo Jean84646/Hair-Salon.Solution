@@ -107,7 +107,7 @@ namespace HairSalon.Models
       return foundSpecialties;
     }
 
-    public static List<Specialties> FindByName(string searchSpecialty)
+    public static List<Specialties> FindByName(string findSpecialty)
     {
       List<Specialties> foundSpecialties = new List<Specialties> {};
       MySqlConnection conn = DB.Connection();
@@ -115,9 +115,9 @@ namespace HairSalon.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM specialties WHERE specialties LIKE @specialties;";
       MySqlParameter searchSpecialty = new MySqlParameter();
-      searchSpecialties.ParameterName = "@specialties";
-      searchSpecialties.Value = searchSpecialties + "%";
-      cmd.Parameters.Add(searchSpecialties);
+      searchSpecialty.ParameterName = "@specialties";
+      searchSpecialty.Value = findSpecialty + "%";
+      cmd.Parameters.Add(searchSpecialty);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -141,7 +141,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT stylists.* FROM stylists JOIN stylist_specialties ON (stylists.id = stylist_specialties.stylist_id) JOIN specialties ON (stylist_specialties.specialty_id = specialties.id) WHERE specialties.id = @IdMatch;";
+      cmd.CommandText = @"SELECT stylists.* FROM stylists JOIN stylist_specialties ON (stylists.id = stylist_specialties.stylist_id) JOIN specialties ON (stylist_specialties.specialties_id = specialties.id) WHERE specialties.id = @IdMatch;";
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@IdMatch";
       searchId.Value = this.id;

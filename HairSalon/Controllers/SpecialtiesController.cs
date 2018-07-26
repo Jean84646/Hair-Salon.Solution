@@ -14,21 +14,28 @@ namespace HairSalon.Controllers
       List<Specialties> allSpecialties = Specialties.GetAll();
       return View(allSpecialties);
     }
-    [HttpGet("/specialties/new")]
+    [HttpPost("/specialties")]
+    public ActionResult Create(string addSpecialty)
+    {
+      Specialties createSpecialty = new Specialties(addSpecialty);
+      createSpecialty.Save();
+      return RedirectToAction("Index");
+    }
+    [HttpGet("/specialties/{ID}")]
+    public ActionResult Detail(int ID)
+    {
+      return View(Specialties.FindById(ID).GetStylists());
+    }
+    [HttpGet("/specialties/Create")]
     public ActionResult CreateForm()
     {
       return View();
     }
-    [HttpPost("/specialties")]
-    public ActionResult Create(string addSpecialties)
+    [HttpPost("/specialties/CreatePairs")]
+    public ActionResult CreatePairs(int stylistId, int specialtyId)
     {
-      string newAddSpecialties = "";
-      if(!string.IsNullOrWhiteSpace(Request.Form["description"]))
-      {
-        newAddSpecialties = addSpecialties;
-      }
-      Specialties createSpecialties = new Specialties(addSpecialties);
-      createSpecialties.Save();
+      StylistSpecialties newPair = new StylistSpecialties(stylistId, specialtyId);
+      newPair.Save();
       return RedirectToAction("Index");
     }
   }

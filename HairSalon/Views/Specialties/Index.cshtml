@@ -5,11 +5,19 @@
 <h1>Specialties List</h1>
 
 <ul>
-  <li>@Model.GetSpecialties()</li>
-  @foreach(var stylist in Model.GetStylists())
+  @foreach(var specialties in Model)
   {
-    <ul>
-      <li>@stylist.GetName</li>
-    </ul>
+    <li><a href="/specialties/@specialties.GetId()">@specialties.GetSpecialties()</a></li>
   }
 </ul>
+
+
+<h3>Add Specialty</h3>
+
+<form action="/specialties" method="post">
+  <div class="">
+    <label for="addSpecialty">Specialty:</label>
+    <input type="text" name="addSpecialty" required>
+  </div>
+  <button type="submit" class="">ADD</button>
+</form>

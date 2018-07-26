@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Specialties List</h1>
+
+<ul>
+  @foreach (var specialty in Model.GetStylists())
+  {
+    <li>@specialty.GetName()</li>
+  }
+</ul>
+
+SHOW ALL STYLISTS FOR THIS SPECIALTY
