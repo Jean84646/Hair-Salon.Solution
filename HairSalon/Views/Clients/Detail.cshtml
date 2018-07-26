@@ -1,0 +1,8 @@
+@using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
+
+<h1>@Model.GetName()'s Detail</h1>
+
+    <p>Preferred Stylist: @Model.GetStylist().GetName()</p>

@@ -14,15 +14,25 @@ namespace HairSalon.Controllers
       List<Client> allClients = Client.GetAll();
       return View(allClients);
     }
-    [HttpGet("/clients/{clientId}/Edit")]
-    public ActionResult EditForm()
+    [HttpGet("/client/{ID}")]
+    public ActionResult Detail(int ID)
     {
-      return View();
+      return View(Client.FindById(ID));
     }
-    [HttpPost("/clients/{clientId}/Edit")]
-    public ActionResult Edit(string clientName, int stylistId, int clientId)
+    [HttpGet("/clients/{clientId}/Edit")]
+    public ActionResult EditForm(int clientId)
+    {
+      return View(Client.FindById(clientId));
+    }
+    [HttpPost("/clients/{clientId}/EditName")]
+    public ActionResult EditName(string clientName, int clientId)
     {
       Client.FindById(clientId).EditName(clientName);
+      return RedirectToAction("Index");
+    }
+    [HttpPost("/clients/{clientId}/EditStylist")]
+    public ActionResult EditStylist(int stylistId, int clientId)
+    {
       Client.FindById(clientId).EditStylistId(stylistId);
       return RedirectToAction("Index");
     }

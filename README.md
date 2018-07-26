@@ -27,6 +27,7 @@ jean84646@gmail.com
 * The User is able to add new stylists to our system when they are hired.
 * The User is able to edit JUST the name of a stylist.
 * The User is able to delete stylists (all and single).
+* The User is to see the stylist's specialties on the stylist's details page.
 
 * The User is able to add new clients to a specific stylist. User should not be able to add a client if no stylists have been added.
 * The User is able to view clients (all and single).
@@ -34,19 +35,19 @@ jean84646@gmail.com
 * The User is able to delete clients (all and single).
 
 * The User is able to add a specialty and view all specialties that have been added.
-* The User is able to add a specialty to a stylist.
 * The User is able to click on a specialty and see all of the stylists that have that specialty.
-* The User is to see the stylist's specialties on the stylist's details page.
 * The User is able to add a stylist to a specialty.
+* The User is able to add a specialty to a stylist.
+
 
 ## Setup Database
 Using MySQL command:
 * CREATE DATABASE jean_jia;
 * USE jean_jia;
-* CREATE TABLE `jean_jia`.`stylists` ( `id` INT NOT NULL AUTO_INCREMENT , `stylist_name` VARCHAR(255) NOT NULL , `stylist_description` TEXT NULL , PRIMARY KEY (`id `)) ENGINE = InnoDB;
-* CREATE TABLE `jean_jia`.`clients` ( `id` INT NOT NULL AUTO_INCREMENT , `client_name` VARCHAR(255) NOT NULL , `stylist_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-* CREATE TABLE `jean_jia`.`specialties` ( `id` INT NOT NULL AUTO_INCREMENT , `specialties` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-* CREATE TABLE `jean_jia`.`stylist_specialties` ( `id` INT NOT NULL AUTO_INCREMENT , `stylist_id` INT NOT NULL , `specialties_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+* CREATE TABLE `"jean_jia"`.`"stylists"` ( `"id"` INT NOT NULL AUTO_INCREMENT , `"stylist_name"` VARCHAR(255) NOT NULL , `"stylist_description"` TEXT NULL , PRIMARY KEY (`"id" `)) ENGINE = InnoDB;
+* CREATE TABLE `"jean_jia"`.`"clients"` ( `"id"` INT NOT NULL AUTO_INCREMENT , `"client_name"` VARCHAR(255) NOT NULL , `"stylist_id"` INT NOT NULL , PRIMARY KEY (`"id"`)) ENGINE = InnoDB;
+* CREATE TABLE `"jean_jia"`.`"specialties"` ( `"id"` INT NOT NULL AUTO_INCREMENT , `"specialties"` VARCHAR(255) NOT NULL , PRIMARY KEY (`"id"`)) ENGINE = InnoDB;
+* CREATE TABLE `"jean_jia"`.`"stylist_specialties"` ( `"id"` INT NOT NULL AUTO_INCREMENT , `"stylist_id"` INT NOT NULL , `"specialties_id"` INT NOT NULL , PRIMARY KEY (`"id"`)) ENGINE = InnoDB;
 
 ### Legal
 

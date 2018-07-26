@@ -39,9 +39,9 @@ namespace HairSalon.Controllers
       return RedirectToAction("Detail", new {ID = stylistID});
     }
     [HttpGet("/stylists/{stylistId}/Edit")]
-    public ActionResult EditForm()
+    public ActionResult EditForm(int stylistID)
     {
-      return View();
+      return View(Stylist.FindById(stylistID));
     }
     [HttpPost("/stylists/{stylistId}/EditName")]
     public ActionResult EditName(int stylistId, string newName)

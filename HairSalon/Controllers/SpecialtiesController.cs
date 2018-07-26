@@ -26,13 +26,13 @@ namespace HairSalon.Controllers
     {
       return View(Specialties.FindById(ID).GetStylists());
     }
-    [HttpGet("/specialties/Create")]
-    public ActionResult CreateForm()
+    [HttpGet("/specialties/pair")]
+    public ActionResult CreatePairs()
     {
       return View();
     }
     [HttpPost("/specialties/CreatePairs")]
-    public ActionResult CreatePairs(int stylistId, int specialtyId)
+    public ActionResult Pair(int stylistId, int specialtyId)
     {
       StylistSpecialties newPair = new StylistSpecialties(stylistId, specialtyId);
       newPair.Save();

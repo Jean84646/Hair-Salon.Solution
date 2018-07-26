@@ -3,20 +3,19 @@
   Layout = "_Layout";
 }
 
-<h1>Edit Client's Information</h1>
-@foreach (var client in Model)
-{
-<form action="/clients/@client.GetId()/Edit" method="post">
+<h1>@Model.GetName()'s Information</h1>
+
+<form action="/clients/@Model.GetId()/EditName" method="post">
   <label for="clientName">Change name:</label>
   <input type="text" name="clientName" required>
-
+  <button type="submit">Edit Name</button>
+</form>
+<form action="/clients/@Model.GetId()/EditStylist" method="post">
   <select name="stylistId">
   @foreach (var stylist in Stylist.GetAll())
     {
       <option value="@stylist.GetId()">@stylist.GetName()</option>
     }
   </select>
-
-  <button type="submit">Edit</button>
+  <button type="submit">Edit Stylist</button>
 </form>
-}
