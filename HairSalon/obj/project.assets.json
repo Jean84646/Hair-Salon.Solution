@@ -9733,11 +9733,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj",
+      "projectUniqueName": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj",
       "projectName": "HairSalon",
-      "projectPath": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj",
+      "projectPath": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj",
       "packagesPath": "C:\\Users\\jean8\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon\\obj\\",
+      "outputPath": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jean8\\AppData\\Roaming\\NuGet\\NuGet.Config",

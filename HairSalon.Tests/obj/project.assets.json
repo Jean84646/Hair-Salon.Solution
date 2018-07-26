@@ -10829,11 +10829,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon.Tests\\HairSalonTest.csproj",
+      "projectUniqueName": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon.Tests\\HairSalonTest.csproj",
       "projectName": "HairSalonTest",
-      "projectPath": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon.Tests\\HairSalonTest.csproj",
+      "projectPath": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon.Tests\\HairSalonTest.csproj",
       "packagesPath": "C:\\Users\\jean8\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon.Tests\\obj\\",
+      "outputPath": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jean8\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10850,8 +10850,8 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj": {
-              "projectPath": "C:\\Users\\jean8\\OneDrive\\Desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj"
+            "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj": {
+              "projectPath": "C:\\Users\\jean8\\onedrive\\desktop\\HairSalon.Solution\\HairSalon\\HairSalon.csproj"
             }
           }
         }

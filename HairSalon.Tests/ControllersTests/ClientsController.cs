@@ -9,7 +9,7 @@ namespace HairSalon.Tests
     [TestClass]
     public class ClientsControllerTest
     {
-      [TestMethod]
+        [TestMethod]
         public void Index_ReturnsCorrectView_True()
         {
             //Arrange
@@ -22,7 +22,7 @@ namespace HairSalon.Tests
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
         [TestMethod]
-        public void Index_HasCorrectModelType_ItemList()
+        public void Index_HasCorrectModelType_ClientList()
         {
             //Arrange
             ViewResult indexView = new ClientsController().Index() as ViewResult;
@@ -33,17 +33,53 @@ namespace HairSalon.Tests
             //Assert
             Assert.IsInstanceOfType(result, typeof(List<Client>));
         }
-      [TestMethod]
-        public void CreateForm_ReturnsCorrectView_True()
+        [TestMethod]
+        public void Detail_ReturnsCorrectView_True()
         {
             //Arrange
             ClientsController controller = new ClientsController();
 
             //Act
-            ActionResult indexView = controller.CreateForm();
+            ActionResult detailView = controller.Detail(1);
 
             //Assert
-            Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+            Assert.IsInstanceOfType(detailView, typeof(ViewResult));
+        }
+        [TestMethod]
+        public void Detail_HasCorrectModelType_Client()
+        {
+            //Arrange
+            ViewResult detailView = new ClientsController().Detail(1) as ViewResult;
+
+            //Act
+            var result = detailView.ViewData.Model;
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(Client));
+        }
+        [TestMethod]
+        public void EditForm_ReturnsCorrectView_True()
+        {
+            //Arrange
+            ClientsController controller = new ClientsController();
+
+            //Act
+            ActionResult editView = controller.EditForm(1);
+
+            //Assert
+            Assert.IsInstanceOfType(editView, typeof(ViewResult));
+        }
+        [TestMethod]
+        public void EditForm_HasCorrectModelType_Client()
+        {
+            //Arrange
+            ViewResult editView = new ClientsController().EditForm(1) as ViewResult;
+
+            //Act
+            var result = editView.ViewData.Model;
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(Client));
         }
     }
 }

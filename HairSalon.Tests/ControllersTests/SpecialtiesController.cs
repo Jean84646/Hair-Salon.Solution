@@ -9,7 +9,7 @@ namespace HairSalon.Tests
     [TestClass]
     public class SpecialtiesControllerTest
     {
-      [TestMethod]
+        [TestMethod]
         public void Index_ReturnsCorrectView_True()
         {
             //Arrange
@@ -22,7 +22,7 @@ namespace HairSalon.Tests
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
         [TestMethod]
-        public void Index_HasCorrectModelType_ItemList()
+        public void Index_HasCorrectModelType_SpecialtiesList()
         {
             //Arrange
             ViewResult indexView = new SpecialtiesController().Index() as ViewResult;
@@ -31,31 +31,43 @@ namespace HairSalon.Tests
             var result = indexView.ViewData.Model;
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(List<Stylist>));
+            Assert.IsInstanceOfType(result, typeof(List<Specialties>));
         }
-      [TestMethod]
-        public void CreateForm_ReturnsCorrectView_True()
+        [TestMethod]
+        public void Detail_ReturnsCorrectView_True()
         {
             //Arrange
             SpecialtiesController controller = new SpecialtiesController();
 
             //Act
-            ActionResult indexView = controller.CreateForm();
+            ActionResult detailView = controller.Detail(1);
 
             //Assert
-            Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+            Assert.IsInstanceOfType(detailView, typeof(ViewResult));
         }
         [TestMethod]
-          public void CreateSearch_ReturnsCorrectView_True()
-          {
-              //Arrange
-              SpecialtiesController controller = new SpecialtiesController();
+        public void Detail_HasCorrectModelType_Specialties()
+        {
+            //Arrange
+            ViewResult detailView = new SpecialtiesController().Detail(1) as ViewResult;
 
-              //Act
-              ActionResult indexView = controller.SearchForm();
+            //Act
+            var result = detailView.ViewData.Model;
 
-              //Assert
-              Assert.IsInstanceOfType(indexView, typeof(ViewResult));
-          }
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(Specialties));
+        }
+        [TestMethod]
+        public void CreatePairs_ReturnsCorrectView_True()
+        {
+            //Arrange
+            SpecialtiesController controller = new SpecialtiesController();
+
+            //Act
+            ActionResult pairView = controller.CreatePairs();
+
+            //Assert
+            Assert.IsInstanceOfType(pairView, typeof(ViewResult));
+        }
     }
 }
