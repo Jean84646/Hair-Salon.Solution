@@ -1,0 +1,22 @@
+@using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
+
+<h1>Edit Client's Information</h1>
+@foreach (var client in Model)
+{
+<form action="/clients/@client.GetId()/Edit" method="post">
+  <label for="clientName">Change name:</label>
+  <input type="text" name="clientName" required>
+
+  <select name="stylistId">
+  @foreach (var stylist in Stylist.GetAll())
+    {
+      <option value="@stylist.GetId()">@stylist.GetName()</option>
+    }
+  </select>
+
+  <button type="submit">Edit</button>
+</form>
+}

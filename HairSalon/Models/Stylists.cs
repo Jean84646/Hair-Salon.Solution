@@ -121,34 +121,34 @@ namespace HairSalon.Models
       return foundStylist;
     }
 
-    public static Stylist FindByName(string searchName)
-    {
-      int id = 0;
-      string name = "";
-      string description = "";
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists WHERE name LIKE @nameMatch;";
-      MySqlParameter paraName = new MySqlParameter();
-      paraName.ParameterName = "@nameMatch";
-      paraName.Value = searchName + '%';
-      cmd.Parameters.Add(paraName);
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        id = rdr.GetInt32(0);
-        name = rdr.GetString(1);
-        description = rdr.GetString(2);
-      }
-      Stylist foundStylist =  new Stylist(name, description, id);
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return foundStylist;
-    }
+    // public static Stylist FindByName(string searchName)
+    // {
+    //   int id = 0;
+    //   string name = "";
+    //   string description = "";
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM stylists WHERE name LIKE @nameMatch;";
+    //   MySqlParameter paraName = new MySqlParameter();
+    //   paraName.ParameterName = "@nameMatch";
+    //   paraName.Value = searchName + '%';
+    //   cmd.Parameters.Add(paraName);
+    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //   while(rdr.Read())
+    //   {
+    //     id = rdr.GetInt32(0);
+    //     name = rdr.GetString(1);
+    //     description = rdr.GetString(2);
+    //   }
+    //   Stylist foundStylist =  new Stylist(name, description, id);
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return foundStylist;
+    // }
 
     public List<Client> GetClients()
     {
@@ -253,7 +253,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists WHERE id = @idMatch; DELETE FROM stylists_specialties WHERE stylist_id = @idMatch;";
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @idMatch; DELETE FROM stylist_specialties WHERE stylist_id = @idMatch;";
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@idMatch";
       searchId.Value = this.id;

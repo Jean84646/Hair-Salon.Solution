@@ -121,34 +121,34 @@ namespace HairSalon.Models
       return foundClient;
     }
 
-    public Stylist GetStylist()
-    {
-      int id = 0;
-      string name = "";
-      string description = "";
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists WHERE id = @MatchID;";
-      MySqlParameter searchMatchID = new MySqlParameter();
-      searchMatchID.ParameterName = "@MatchID";
-      searchMatchID.Value = this.stylistID;
-      cmd.Parameters.Add(searchMatchID);
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        id = rdr.GetInt32(0);
-        name = rdr.GetString(1);
-        description = rdr.GetString(2);
-      }
-      Stylist newStylist = new Stylist(name, description, id);
-      conn.Close();
-      if (conn !=null)
-      {
-        conn.Dispose();
-      }
-      return newStylist;
-    }
+    // public Stylist GetStylist()
+    // {
+    //   int id = 0;
+    //   string name = "";
+    //   string description = "";
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM stylists WHERE id = @MatchID;";
+    //   MySqlParameter searchMatchID = new MySqlParameter();
+    //   searchMatchID.ParameterName = "@MatchID";
+    //   searchMatchID.Value = this.stylistID;
+    //   cmd.Parameters.Add(searchMatchID);
+    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //   while(rdr.Read())
+    //   {
+    //     id = rdr.GetInt32(0);
+    //     name = rdr.GetString(1);
+    //     description = rdr.GetString(2);
+    //   }
+    //   Stylist newStylist = new Stylist(name, description, id);
+    //   conn.Close();
+    //   if (conn !=null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return newStylist;
+    // }
 
     public void EditName(string newName)
     {

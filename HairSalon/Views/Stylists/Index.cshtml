@@ -7,12 +7,23 @@
 <ul>
   @foreach(var stylist in Model)
   {
-    <form class="" action="/stylists/delete" method="post">
-      <input type="number" name="stylistId" value="@stylist.GetId()" hidden>
-      <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a><button type="submit" name="button" class="btn">Delete</button></li>
-        <ul>
-          <li>Description: @stylist.GetDescription()</li>
-        </ul>
-    </form>
+    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+      <ul class="no-bullet">
+        <li>Description: @stylist.GetDescription()</li>
+      </ul>
   }
 </ul>
+
+<h3>Add Stylist</h3>
+
+<form action="/stylists" method="post">
+  <div class="">
+    <label for="stylistName">Stylist Name:</label>
+    <input type="text" name="stylistName" required>
+  </div>
+  <div class="">
+    <label for="description">Description:</label>
+    <input type="text" name="description" required>
+  </div>
+  <button type="submit" class="">ADD</button>
+</form>

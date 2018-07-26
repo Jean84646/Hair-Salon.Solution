@@ -2,8 +2,25 @@
   Layout = "_Layout";
 }
 
-<h1>@Model.GetName()'s Clients List</h1>
+<h1>@Model.GetName()'s Detail List</h1>
 
+<div class="delete-button">
+  <a href= "/stylists/@Model.GetId()/Edit">Edit Stylist's Name</a>
+  <form action="/stylists/delete" method="post">
+    <input type="text" name="stylistId" value="@Model.GetId()" hidden>
+    <button type="submit" name="button" class="button">Delete this stylist</button>
+  </form>
+</div>
+
+<h3>Specialties:</h3>
+<ul class="no-bullet">
+  @foreach (var specialties in Model.GetSpecialties())
+  {
+    <li>@specialties.GetSpecialties()</li>
+  }
+</ul>
+
+<h3>Client List:</h3>
 <ul>
   @foreach (var client in Model.GetClients())
   {
@@ -12,9 +29,7 @@
 </ul>
 
 <form action="/stylists/@Model.GetId()/AddClient" method="post">
-  <div class="">
-    <label for="clientName">Add a client:</label>
-    <input type="text" name="clientName" required>
-  </div>
-  <button type="submit" class="">ADD</button>
+  <label for="clientName">Add new client:</label>
+  <input type="text" name="clientName" required>
+  <button type="submit" class="button">ADD</button>
 </form>

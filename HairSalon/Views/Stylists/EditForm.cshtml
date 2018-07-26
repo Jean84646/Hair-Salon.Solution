@@ -1,0 +1,11 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Edit Stylist's Name</h1>
+
+<form action="/stylists/@Model.GetId()/EditName" method="post">
+  <label for="newName">Enter new name:</label>
+  <input type="text" name="newName" required>
+  <button type="submit">Edit</button>
+</form>

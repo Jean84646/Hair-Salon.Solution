@@ -107,16 +107,16 @@ namespace HairSalon.Models
       return foundSpecialties;
     }
 
-    public static List<Specialties> FindSpecialtiesByType(string searchSpecialtyType)
+    public static List<Specialties> FindByName(string searchSpecialty)
     {
       List<Specialties> foundSpecialties = new List<Specialties> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM specialties WHERE specialties LIKE @specialties;";
-      MySqlParameter searchSpecialties = new MySqlParameter();
+      MySqlParameter searchSpecialty = new MySqlParameter();
       searchSpecialties.ParameterName = "@specialties";
-      searchSpecialties.Value = searchSpecialtyType + "%";
+      searchSpecialties.Value = searchSpecialties + "%";
       cmd.Parameters.Add(searchSpecialties);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())

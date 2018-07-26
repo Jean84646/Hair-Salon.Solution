@@ -2,11 +2,11 @@ body {
   /* font-family: 'Lobster', cursive; */
   font-family: 'Abril Fatface', cursive;
   color: black;
-  font-size: 1.5em;
+  font-size: 1.75em;
   background:
   linear-gradient(
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.2)
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.3)
     ),
   url("/img/salon.jpg") no-repeat center fixed;
   background-size: cover;
@@ -28,7 +28,12 @@ h1 {
 #navbar li {
   background-color: black;
   opacity: 0.7;
-  /* display: inline-block; */
+  padding: 10px;
+  display: inline-block;
+}
+
+a {
+  color: black;
 }
 
 #navbar a {
@@ -39,4 +44,21 @@ h1 {
   color: black;
   background-color: white;
   text-decoration: none;
+}
+
+.edit {
+  font-size: 0.7em;
+  color: black;
+}
+
+.button {
+
+}
+
+.delete-button {
+  float: right;
+}
+
+.no-bullet {
+  list-style-type: none;
 }

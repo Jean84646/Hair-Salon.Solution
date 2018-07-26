@@ -14,11 +14,6 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View(allStylists);
     }
-    [HttpGet("/stylists/new")]
-    public ActionResult CreateForm()
-    {
-      return View();
-    }
     [HttpPost("/stylists")]
     public ActionResult Create(string stylistName, string description)
     {
@@ -43,10 +38,22 @@ namespace HairSalon.Controllers
       newPair.Save();
       return RedirectToAction("Detail", new {ID = stylistID});
     }
-    [HttpGet("/stylists/search")]
-    public ActionResult SearchForm()
+    [HttpGet("/stylists/{stylistId}/Edit")]
+    public ActionResult EditForm()
     {
       return View();
+    }
+    [HttpPost("/stylists/{stylistId}/EditName")]
+    public ActionResult EditName(int stylistId, string newName)
+    {
+      Stylist.FindById(stylistId).EditName(newName);
+      return RedirectToAction("Detail", new { id = stylistId});
+    }
+    [HttpPost("/stylists/delete")]
+    public ActionResult Delete(int stylistId)
+    {
+      Stylist.FindById(stylistId).Delete();
+      return RedirectToAction("Index");
     }
   }
 }

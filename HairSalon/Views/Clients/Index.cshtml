@@ -3,9 +3,19 @@
 }
 
 <h1>Clients List</h1>
+
 <ul>
   @foreach(var client in Model)
   {
     <li>@client.GetName()</li>
+      <ul>
+        <li><a href="/clients/@client.GetId()/edit">Edit</a></li>
+        <li>
+          <form action="/clients/delete" method="post">
+            <input type="text" name="clientId" value="@client.GetId()" hidden>
+            <button type="submit" name="button" class="button">Delete</button>
+          </form>
+        </li>
+      </ul>
   }
 </ul>

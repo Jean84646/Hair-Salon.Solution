@@ -5,8 +5,11 @@
 <h1>Specialties List</h1>
 
 <ul>
-  @foreach(var specialties in Model)
+  <li>@Model.GetSpecialties()</li>
+  @foreach(var stylist in Model.GetStylists())
   {
-    <li>@specialties.GetSpecialties()</li>
+    <ul>
+      <li>@stylist.GetName</li>
+    </ul>
   }
 </ul>
