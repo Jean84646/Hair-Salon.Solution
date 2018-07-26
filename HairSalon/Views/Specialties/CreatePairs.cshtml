@@ -4,3 +4,20 @@
 }
 
 <h1>Assign specialty and stylist</h1>
+
+<form action="/specialties/pair" method="post">
+  <p>Select Specialty:</p>
+  <select name="specialtyId">
+    @foreach(var specialty in Specialties.GetAll())
+    {
+      <option value="@specialty.GetId()">@specialty.GetSpecialties()</option>
+    }
+  </select><p>Add a stylist:</p>
+  <select name="stylistId" id="float-right">
+    @foreach(var stylist in Stylist.GetAll())
+    {
+      <option value="@stylist.GetId()">@stylist.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Pair</button>
+</form>

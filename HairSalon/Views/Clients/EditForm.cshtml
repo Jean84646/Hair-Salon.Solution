@@ -11,11 +11,12 @@
   <button type="submit">Edit Name</button>
 </form>
 <form action="/clients/@Model.GetId()/EditStylist" method="post">
+  <label>Change stylist:</label>
   <select name="stylistId">
-  @foreach (var stylist in Stylist.GetAll())
-    {
-      <option value="@stylist.GetId()">@stylist.GetName()</option>
-    }
+    @foreach (var stylist in Stylist.GetAll())
+      {
+        <option value="@stylist.GetId()">@stylist.GetName()</option>
+      }
   </select>
   <button type="submit">Edit Stylist</button>
 </form>

@@ -24,14 +24,14 @@ namespace HairSalon.Controllers
     [HttpGet("/specialties/{ID}")]
     public ActionResult Detail(int ID)
     {
-      return View(Specialties.FindById(ID).GetStylists());
+      return View(Specialties.FindById(ID));
     }
     [HttpGet("/specialties/pair")]
     public ActionResult CreatePairs()
     {
       return View();
     }
-    [HttpPost("/specialties/CreatePairs")]
+    [HttpPost("/specialties/pair")]
     public ActionResult Pair(int stylistId, int specialtyId)
     {
       StylistSpecialties newPair = new StylistSpecialties(stylistId, specialtyId);
