@@ -75,6 +75,74 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreEqual(testList, result);
     }
-    
+    [TestMethod]
+    public void Find_FindClientInDatabase_Client()
+    {
+      //Arrange
+      Client testClient = new Client("testName", 1);
+      testClient.Save();
+
+      //Act
+      Client resultClient = Client.FindById(testClient.GetId());
+
+      //Assert
+      Assert.AreEqual(testClient, resultClient);
+    }
+    [TestMethod]
+    public void FindStylist_FindThisClientStylist_ReturnStylist()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testStylist");
+      testStylist.Save();
+      Client testClient = new Client("testClient", testStylist.GetId());
+      testClient.Save();
+
+      // Act
+      Stylist resultStylist = testClient.GetStylist();
+
+      // Assert
+      Assert.AreEqual(testStylist, resultStylist);
+    }
+    [TestMethod]
+    public void EditName_EditClientNameInDatabase_Client()
+    {
+      // Arrange
+      Client testClient = new Client("testName1", 1);
+      testClient.Save();
+      string testName = "testname2";
+
+      // Act
+      testClient.EditName(testName);
+
+      // Assert
+      Assert.AreEqual(testName, Client.FindById(testClient.GetId()).GetName());
+    }
+    [TestMethod]
+    public void EditStylistId_EditClientStylistIdInDatabase_Client()
+    {
+      // Arrange
+      Client testClient = new Client("testName1", 1);
+      testClient.Save();
+      int testStylistId = 2;
+
+      // Act
+      testClient.EditStylistId(testStylistId);
+
+      // Assert
+      Assert.AreEqual(testStylistId, Client.FindById(testClient.GetId()).GetStylistID());
+    }
+    [TestMethod]
+    public void Delete_DeleteClientFromDatabase_Client()
+    {
+      // Arrange
+      Client testClient = new Client("testName", 1);
+      testClient.Save();
+
+      // Act
+      testClient.Delete();
+
+      // Assert
+      Assert.AreEqual(0, Client.FindById(testClient.GetId()).GetId());
+    }
   }
 }

@@ -75,5 +75,87 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreEqual(testList, result);
     }
+    [TestMethod]
+    public void Find_FindStylistInDatabase_Stylist()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("testName", "testDescription");
+      testStylist.Save();
+      List<Stylist> testList = new List<Stylist> {testStylist};
+
+      //Act
+      Stylist resultById = Stylist.FindById(testStylist.GetId());
+      List<Stylist> resultByName = Stylist.FindByName(testStylist.GetName());
+
+      //Assert
+      Assert.AreEqual(testStylist, resultById);
+      CollectionAssert.AreEqual(testList, resultByName);
+    }
+    [TestMethod]
+    public void FindClients_FindClientsOfThisStylist_ClientList()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testStylist", "testDescription", 1);
+      testStylist.Save();
+      Client testClient = new Client("testName", 1, 1);
+      testClient.Save();
+      List<Client> myClients = new List<Client> {testClient};
+
+      // Act
+      List<Client> resultClients = testStylist.GetClients();
+
+      // Assert
+      CollectionAssert.AreEqual(myClients, resultClients);
+    }
+    [TestMethod]
+    public void GetSpecialties_RetrievesAllSpecialtiesWithStylistId_SpecialtiesList()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testStylist");
+      testStylist.Save();
+      Specialties testSpecialty = new Specialties("testSpecialty");
+      testSpecialty.Save();
+      StylistSpecialties testStylistSpecialty = new StylistSpecialties(testStylist.GetId(), testSpecialty.GetId());
+      testStylistSpecialty.Save();
+      List<Specialties> testSpecialties = new List<Specialties> {testSpecialty};
+
+      // Act
+      List<Specialties> resultSpecialties = testStylist.GetSpecialties();
+
+      // Assert
+      CollectionAssert.AreEqual(testSpecialties, resultSpecialties);
+    }
+    [TestMethod]
+    public void EditName_EditStylistNameInDatabase_Stylist()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testName1", "testDescription");
+      testStylist.Save();
+      string testName = "testname2";
+
+      // Act
+      testStylist.EditName(testName);
+
+      // Assert
+      Assert.AreEqual(testName, Stylist.FindById(testStylist.GetId()).GetName());
+    }
+    [TestMethod]
+    public void Delete_DeleteStylistFromDatabaseAndStylist_SpecialtyTable_Stylist()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testName", "testDescription", 1);
+      testStylist.Save();
+      Specialties testSpecialty = new Specialties("testSpecialty");
+      testSpecialty.Save();
+      StylistSpecialties testStylistSpecialty = new StylistSpecialties(testStylist.GetId(), testSpecialty.GetId());
+      testStylistSpecialty.Save();
+
+      // Act
+      testStylist.Delete();
+
+      // Assert
+      Assert.AreEqual(0, Stylist.FindById(testStylist.GetId()).GetId());
+      Assert.AreEqual(0, testSpecialty.GetStylists().Count);
+    }
   }
 }
