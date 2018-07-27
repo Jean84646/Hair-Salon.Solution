@@ -66,41 +66,41 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
-    public static StylistSpecialties FindById(int searchId)
-    {
-      int id = 0;
-      int stylistId = 0;
-      int specialtiesId = 0;
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist_specialties WHERE id = @idMatch;";
-      MySqlParameter parameterId = new MySqlParameter();
-      parameterId.ParameterName = "@idMatch";
-      parameterId.Value = searchId;
-      cmd.Parameters.Add(parameterId);
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        id = rdr.GetInt32(0);
-        stylistId = rdr.GetInt32(1);
-        specialtiesId = rdr.GetInt32(2);
-      }
-      StylistSpecialties foundStylistSpecialties =  new StylistSpecialties(stylistId, specialtiesId, id);
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return foundStylistSpecialties;
-    }
+    // public static StylistSpecialties FindById(int searchId)
+    // {
+    //   int id = 0;
+    //   int stylistId = 0;
+    //   int specialtiesId = 0;
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM stylist_specialties WHERE id = @idMatch;";
+    //   MySqlParameter parameterId = new MySqlParameter();
+    //   parameterId.ParameterName = "@idMatch";
+    //   parameterId.Value = searchId;
+    //   cmd.Parameters.Add(parameterId);
+    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //   while(rdr.Read())
+    //   {
+    //     id = rdr.GetInt32(0);
+    //     stylistId = rdr.GetInt32(1);
+    //     specialtiesId = rdr.GetInt32(2);
+    //   }
+    //   StylistSpecialties foundStylistSpecialties =  new StylistSpecialties(stylistId, specialtiesId, id);
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return foundStylistSpecialties;
+    // }
     public static List<StylistSpecialties> GetAll()
     {
       List <StylistSpecialties> newStylistSpecialtiess = new List<StylistSpecialties> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists_specialties;";
+      cmd.CommandText = @"SELECT * FROM stylist_specialties;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -123,7 +123,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists_specialties;";
+      cmd.CommandText = @"DELETE FROM stylist_specialties;";
       cmd.ExecuteNonQuery();
 
       conn.Close();
